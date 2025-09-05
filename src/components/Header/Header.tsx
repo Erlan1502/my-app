@@ -6,7 +6,7 @@ import styles from './header.module.css';
 import AuthForm from '../AuthForm/AuthForm';
 
 export default function Header() {
-  const isLoggedIn = false; // Временно
+  const isLoggedIn = true; // Временно
   const userName = 'Сергей';
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -25,17 +25,19 @@ export default function Header() {
           <div className={styles.containerRight}>
             <nav>
               {isLoggedIn ? (
-                <div className={styles.userProfile}>
-                  <div className={styles.avatar}>
+                <Link href="/fitness/profile" className={styles.logo}>
+                  <div className={styles.userProfile}>
+                    <div className={styles.avatar}>
+                      <svg>
+                        <use href="/img/icon/Profile.svg"></use>
+                      </svg>
+                    </div>
+                    <span className={styles.userName}>{userName}</span>
                     <svg>
-                      <use href="/img/icon/Profile.svg"></use>
+                      <use href="/img/icon/DownChevron.svg"></use>
                     </svg>
                   </div>
-                  <span className={styles.userName}>{userName}</span>
-                  <svg>
-                    <use href="/img/icon/DownChevron.svg"></use>
-                  </svg>
-                </div>
+                </Link>
               ) : (
                 <button
                   type="button"

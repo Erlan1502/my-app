@@ -1,11 +1,9 @@
 import CourseCard from '@/components/CourseCard/CourseCard';
-import Header from '@/components/Header/Header';
 import styles from './page.module.css';
 
 export default function HomePage() {
   return (
     <div className={styles.container}>
-      <Header></Header>
       <div className={styles.hero}>
         <div className={styles.title}>
           Начните заниматься спортом и улучшите качество жизни
@@ -50,7 +48,7 @@ export default function HomePage() {
         />
       </div>
       <div className={styles.footer}>
-        <div className={styles.footerButton}>Наверх</div>
+        <div className={styles.footerButton}>Наверх ↑</div>
       </div>
     </div>
   );

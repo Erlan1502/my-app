@@ -1,6 +1,6 @@
 import CourseCard from '@/components/CourseCard/CourseCard';
 import Header from '@/components/Header/Header';
-import styles from '@/pages/main/main.module.css';
+import styles from './page.module.css';
 
 export default function HomePage() {
   return (
@@ -10,7 +10,11 @@ export default function HomePage() {
         <div className={styles.title}>
           Начните заниматься спортом и улучшите качество жизни
         </div>
-        <div className={styles.bubble}>Измени своё тело за полгода!</div>
+        <div className={styles.motivation}>
+          <svg width="288" height="120">
+            <use href="/img/ChangeYourBody.svg"></use>
+          </svg>
+        </div>
       </div>
 
       <div className={styles.grid}>
@@ -44,6 +48,9 @@ export default function HomePage() {
           duration={25}
           timePerDay="20-50 мин/день"
         />
+      </div>
+      <div className={styles.footer}>
+        <div className={styles.footerButton}>Наверх</div>
       </div>
     </div>
   );

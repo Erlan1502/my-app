@@ -39,7 +39,7 @@ export default function Header() {
       <div className={styles.container}>
         <div className={styles.containerLeft}>
           <Link href="/" className={styles.logo}>
-            <svg>
+            <svg width="230" height="35">
               <use href="/img/icon/logo.svg" />
             </svg>
           </Link>

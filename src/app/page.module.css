@@ -1,31 +1,29 @@
 .container {
-  padding-top: 120px;
-  padding-bottom: 50px;
   max-width: 1440px;
   margin: 0 auto;
-  padding-left: 16px;
-  padding-right: 16px;
+  margin-left: 140px;
+  margin-right: 140px;
 }
 
 .hero {
-  max-width: 800px;
+  margin-top: 60px;
+  max-width: 100%;
   margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .title {
-  font-size: 56px;
-  font-weight: 700;
-  line-height: 1.2;
+  color: rgba(0, 0, 0, 1);
+  font-family: Roboto;
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 70px;
+  letter-spacing: 0px;
+  text-align: left;
 }
-
-.bubble {
-  top: 0;
-  right: -200px;
-  background-color: #d9f99d;
-  padding: 20px 30px;
-  border-radius: 25px;
-  font-size: 1.25rem;
-  font-weight: 600;
+.motivation {
+  margin-top: 10px;
 }
 
 .grid {
@@ -42,4 +40,22 @@
   line-height: 21px;
   letter-spacing: 0px;
   text-align: left;
+}
+.footer {
+  margin-bottom: 81px;
+  margin-top: 34px;
+  display: flex;
+  justify-content: center;
+}
+.footerButton {
+  width: 127px;
+  height: 52px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: undefined;
+  padding: 16px 26px 16px 26px;
+  border-radius: 46px;
+  background: rgba(188, 236, 48, 1);
 }

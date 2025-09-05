@@ -4,6 +4,9 @@ import styles from './page.module.css';
 export default function HomePage() {
   return (
     <div className={styles.container}>
+      <div className={styles.description}>
+        Онлайн-тренировки для занятий дома
+      </div>
       <div className={styles.hero}>
         <div className={styles.title}>
           Начните заниматься спортом и улучшите качество жизни

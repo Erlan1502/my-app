@@ -1,0 +1,38 @@
+.container {
+  padding-top: 120px; /* Оставляем место для абсолютного хедера */
+  padding-bottom: 50px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.hero {
+  position: relative;
+  max-width: 800px;
+  margin-bottom: 50px;
+}
+
+.title {
+  font-size: 3.5rem; /* 56px */
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.bubble {
+  position: absolute;
+  top: 0;
+  right: -200px; /* Положение относительно .hero */
+  background-color: #d9f99d; /* lime-300 */
+  padding: 20px 30px;
+  border-radius: 25px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  /* Добавьте "хвостик" для бабла через псевдоэлемент, если нужно */
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+}

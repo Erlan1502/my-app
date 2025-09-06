@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import styles from './userInfo.module.css';
 import { UserProfile } from '@/types/api';
-
-interface UserProfileModal extends UserProfile {
+type User = UserProfile['user'];
+interface UserProfileModal extends User {
   onLogout: () => void;
 }
 

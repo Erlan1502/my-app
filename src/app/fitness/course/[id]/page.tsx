@@ -58,7 +58,8 @@ export default function CoursePage() {
         // Если пользователь авторизован, проверяем, добавлен ли у него этот курс
         if (token) {
           const userProfile = await getUserProfile(token);
-          if (userProfile.selectedCourses.includes(params.id as string)) {
+          console.log(userProfile);
+          if (userProfile.user.selectedCourses.includes(params.id as string)) {
             setIsCourseAdded(true);
           }
         }
@@ -155,14 +156,18 @@ export default function CoursePage() {
         </div>
 
         <div className={styles.startSection}>
-          <div>
+          <div className={styles.motivation}>
             <h2 className={styles.subTitle}>Начните путь к новому телу</h2>
             <ul className={styles.benefitsList}>
-              <li>проработка всех групп мышц</li>
-              <li>тренировка суставов</li>
-              <li>улучшение циркуляции крови</li>
-              <li>упражнения заряжают бодростью</li>
-              <li>помогают противостоять стрессам</li>
+              <li className={styles.benefitItem}>проработка всех групп мышц</li>
+              <li className={styles.benefitItem}>тренировка суставов</li>
+              <li className={styles.benefitItem}>улучшение циркуляции крови</li>
+              <li className={styles.benefitItem}>
+                упражнения заряжают бодростью
+              </li>
+              <li className={styles.benefitItem}>
+                помогают противостоять стрессам
+              </li>
             </ul>
             <button
               className={styles.startButton}
@@ -172,14 +177,23 @@ export default function CoursePage() {
               {getButtonText()}
             </button>
           </div>
-          <div>
+          <div className={styles.absoluteImage1}>
             <Image
-              src={images.start}
+              src="/img/Man-ready.png"
               alt="Мужчина занимается йогой"
-              width={400}
-              height={400}
-              className={styles.startImage}
+              width={520}
+              height={530}
             />
+          </div>
+          <div className={styles.clippingWrapper}>
+            <div className={styles.absoluteImage2}>
+              <Image
+                src="/img/Style-Man-ready.svg"
+                alt="Стильная линия для мужчины"
+                width={600}
+                height={600}
+              />
+            </div>
           </div>
         </div>
       </div>

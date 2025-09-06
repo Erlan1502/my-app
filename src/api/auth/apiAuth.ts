@@ -6,7 +6,7 @@ export const registerUser = async (
 ): Promise<AuthPayloadReturn> => {
   return fetchApi<{ message: string }>('/auth/register', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    // headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   });
 };
@@ -14,7 +14,6 @@ export const registerUser = async (
 export const loginUser = async (data: AuthPayload) => {
   return fetchApi<{ token: string }>('/auth/login', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   });
 };

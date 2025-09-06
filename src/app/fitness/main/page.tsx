@@ -61,12 +61,6 @@ export default function HomePage() {
       <div className={styles.grid}>
         {allCourses.map((course: Course) => (
           <Link href={`/fitness/course/${course._id}`} key={course._id}>
-            {/* Примечание: API для получения всех курсов (`/api/fitness/courses`) 
-              не возвращает детальную информацию (длительность, сложность).
-              В идеале, API должен был бы предоставлять эти данные сразу.
-              Для демонстрации мы используем здесь статичные значения.
-              Полные динамические данные подгружаются на странице самого курса.
-            */}
             <CourseCard
               nameRU={course.nameRU}
               imageUrl={courseImages[course.nameRU]}

@@ -1,6 +1,8 @@
 export interface UserProfile {
-  email: string;
-  selectedCourses: string[]; // Массив ID курсов
+  user: {
+    email: string;
+    selectedCourses: string[];
+  };
 }
 
 export interface Course {

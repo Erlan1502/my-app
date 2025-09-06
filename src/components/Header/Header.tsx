@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import styles from './header.module.css';
 import AuthForm from '../AuthForm/AuthForm';
+import UserInfo from '../UserInfo/UserInfo';
 
 export default function Header() {
   const isLoggedIn = true; // Временно
@@ -52,7 +53,6 @@ export default function Header() {
         </div>
       </header>
 
-      {/* 👇 6. Показываем форму, только если isModalOpen === true */}
       {isModalOpen && <AuthForm onClose={() => setIsModalOpen(false)} />}
     </>
   );

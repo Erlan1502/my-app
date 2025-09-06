@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import styles from './profileCourseCard.module.css';
-// ЧУТЬ ПОЗЖЕ ДОБАВИМ import { Course } from '@/types/api';, А ПОКА СТРИНГ
+import { CourseDetails } from '@/types/api';
 
-// 👇 2. Обновляем тип пропсов
 type ProfileCourseCardProps = {
   course: string;
   imageUrl: string;
@@ -29,7 +28,31 @@ export default function ProfileCourseCard({
         height={310}
         className={styles.image}
       />
-      <h3 className={styles.title}>{course}</h3>{' '}
+      <h3 className={styles.title}>{course}</h3>
+      <div className={styles.infoItem}>
+        <span>
+          <svg>
+            <use href="/img/icon/Calendar.svg" />
+          </svg>
+        </span>
+        <span>15 дней</span>
+      </div>
+      <div className={styles.infoItem}>
+        <span>
+          <svg>
+            <use href="/img/icon/Time.svg" />
+          </svg>
+        </span>
+        <span>15</span>
+      </div>
+      <div className={styles.infoItem}>
+        <span>
+          <svg>
+            <use href="/img/icon/Difficulty.svg" />
+          </svg>
+        </span>
+        <span>Сложность</span>
+      </div>
       <div className={styles.progressContainer}>
         <p>Прогресс: {progress}%</p>
         <div className={styles.progressBar}>

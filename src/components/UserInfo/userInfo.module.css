@@ -1,0 +1,50 @@
+.menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  z-index: 10;
+}
+
+.email {
+  font-size: 16px;
+  color: #888;
+  margin-top: -15px;
+}
+
+.button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 46px;
+  cursor: pointer;
+  font-size: 16px;
+  border: 1px solid transparent;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.primary {
+  background-color: rgba(188, 236, 48, 1);
+  color: black;
+}
+
+.primary:hover {
+  background-color: #a8d22c;
+}
+
+.secondary {
+  background-color: transparent;
+  border-color: #aaa;
+  color: black;
+}
+
+.secondary:hover {
+  background-color: #f2f2f2;
+}

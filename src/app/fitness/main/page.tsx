@@ -1,6 +1,5 @@
-import CourseCard from '@/components/CourseCard/CourseCard';
 import styles from './page.module.css';
-
+import CourseCard from '@/components/CourseCard/CourseCard';
 export default function HomePage() {
   return (
     <div className={styles.container}>
@@ -20,34 +19,39 @@ export default function HomePage() {
 
       <div className={styles.grid}>
         <CourseCard
-          title="Йога"
+          nameRU="Йога"
           imageUrl="/img/Yoga.png"
-          duration={25}
-          timePerDay="20-50 мин/день"
+          durationInDays={25}
+          dailyDurationInMinutes={{ from: 20, to: 50 }}
+          difficulty="Сложно"
         />
         <CourseCard
-          title="Стретчинг"
+          nameRU="Стретчинг"
           imageUrl="/img/Stretching.png"
-          duration={25}
-          timePerDay="20-50 мин/день"
+          durationInDays={25}
+          dailyDurationInMinutes={{ from: 20, to: 50 }}
+          difficulty="Сложно"
         />
         <CourseCard
-          title="Фитнес"
+          nameRU="Фитнес"
           imageUrl="/img/Fitness.png"
-          duration={25}
-          timePerDay="20-50 мин/день"
+          durationInDays={25}
+          dailyDurationInMinutes={{ from: 20, to: 50 }}
+          difficulty="Сложно"
         />
         <CourseCard
-          title="Степ-аэробика"
+          nameRU="Степ-аэробика"
           imageUrl="/img/Step-aerobic.png"
-          duration={25}
-          timePerDay="20-50 мин/день"
+          durationInDays={25}
+          dailyDurationInMinutes={{ from: 20, to: 50 }}
+          difficulty="Сложно"
         />
         <CourseCard
-          title="Бодифлекс"
+          nameRU="Бодифлекс"
           imageUrl="/img/Body-flex.png"
-          duration={25}
-          timePerDay="20-50 мин/день"
+          durationInDays={25}
+          dailyDurationInMinutes={{ from: 20, to: 50 }}
+          difficulty="Сложно"
         />
       </div>
       <div className={styles.footer}>

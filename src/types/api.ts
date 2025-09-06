@@ -22,6 +22,16 @@ export interface CourseDetails extends Course {
   };
 }
 
+export interface CourseDetailsStatic {
+  nameRU: string;
+  difficulty: string;
+  durationInDays: number;
+  dailyDurationInMinutes: {
+    from: number;
+    to: number;
+  };
+  imageUrl?: string;
+}
 export interface Exercise {
   _id: string;
   name: string;

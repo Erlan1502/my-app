@@ -1,31 +1,26 @@
 import Image from 'next/image';
 import styles from '@/components/CourseCard/courseCard.module.css';
-
-type CourseCardProps = {
-  title: string;
-  imageUrl: string;
-  duration: number;
-  timePerDay: string;
-};
+import { CourseDetailsStatic } from '@/types/api';
 
 export default function CourseCard({
-  title,
+  nameRU,
+  difficulty,
+  durationInDays,
+  dailyDurationInMinutes,
   imageUrl,
-  duration,
-  timePerDay,
-}: CourseCardProps) {
+}: CourseDetailsStatic) {
   return (
     <div className={styles.card}>
       <button className={styles.plusButton}>+</button>
       <Image
-        src={imageUrl}
-        alt={title}
+        src={imageUrl ? imageUrl : ''}
+        alt={nameRU}
         width={360}
         height={280}
         className={styles.image}
       />
       <div className={styles.cardDown}>
-        <h3 className={styles.title}>{title}</h3>
+        <h3 className={styles.title}>{nameRU}</h3>
         <div className={styles.info}>
           <div className={styles.infoItem}>
             <span>
@@ -33,7 +28,7 @@ export default function CourseCard({
                 <use href="/img/icon/Calendar.svg" />
               </svg>
             </span>
-            <span>{duration} дней</span>
+            <span>{durationInDays} дней</span>
           </div>
           <div className={styles.infoItem}>
             <span>
@@ -41,13 +36,19 @@ export default function CourseCard({
                 <use href="/img/icon/Time.svg" />
               </svg>
             </span>
-            <span>{timePerDay}</span>
+            <span>
+              {dailyDurationInMinutes.from}-{dailyDurationInMinutes.to}
+              мин/день
+            </span>
           </div>
           <div className={styles.infoItem}>
             <span>
-              <svg>
-                <use href="/img/icon/Difficulty.svg" />
-              </svg>
+              {difficulty === 'Сложно' ? (
+                <svg>
+                  <use href="/img/icon/Difficulty.svg" />
+                </svg>
+              ) : null}{' '}
+              {/*ВОЗМОЖНО ДОБАВИМ РАЗНЫЕ СЛОЖНОСТИ*/}
             </span>
             <span>Сложность</span>
           </div>

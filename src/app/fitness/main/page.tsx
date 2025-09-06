@@ -13,7 +13,6 @@ import styles from './main.module.css';
 import CourseCard from '@/components/CourseCard/CourseCard';
 import { Course } from '@/types/api';
 
-// Картинки из public
 const courseImages: { [key: string]: string } = {
   Йога: '/img/Yoga.png',
   Стретчинг: '/img/Stretching.png',
@@ -37,9 +36,9 @@ export default function HomePage() {
       } catch (err) {
         dispatch(
           setError(err instanceof Error ? err.message : 'Ошибка загрузки')
-        ); //
+        );
       } finally {
-        dispatch(setLoading(false)); //
+        dispatch(setLoading(false));
       }
     };
 
@@ -64,9 +63,9 @@ export default function HomePage() {
             <CourseCard
               nameRU={course.nameRU}
               imageUrl={courseImages[course.nameRU]}
-              durationInDays={25}
-              dailyDurationInMinutes={{ from: 20, to: 50 }}
-              difficulty="Сложно"
+              durationInDays={course.durationInDays}
+              dailyDurationInMinutes={course.dailyDurationInMinutes}
+              difficulty={course.difficulty}
             />
           </Link>
         ))}

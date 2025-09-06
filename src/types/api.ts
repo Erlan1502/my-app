@@ -13,6 +13,12 @@ export interface Course {
   directions: string[];
   fitting: string[];
   workouts: string[];
+  durationInDays: number;
+  dailyDurationInMinutes: {
+    from: number;
+    to: number;
+  };
+  difficulty: string;
 }
 
 export interface CourseDetails extends Course {

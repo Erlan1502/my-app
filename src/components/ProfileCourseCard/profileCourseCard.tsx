@@ -28,41 +28,45 @@ export default function ProfileCourseCard({
         height={310}
         className={styles.image}
       />
-      <h3 className={styles.title}>{course}</h3>
-      <div className={styles.infoItem}>
-        <span>
-          <svg>
-            <use href="/img/icon/Calendar.svg" />
-          </svg>
-        </span>
-        <span>15 дней</span>
-      </div>
-      <div className={styles.infoItem}>
-        <span>
-          <svg>
-            <use href="/img/icon/Time.svg" />
-          </svg>
-        </span>
-        <span>15</span>
-      </div>
-      <div className={styles.infoItem}>
-        <span>
-          <svg>
-            <use href="/img/icon/Difficulty.svg" />
-          </svg>
-        </span>
-        <span>Сложность</span>
-      </div>
-      <div className={styles.progressContainer}>
-        <p>Прогресс: {progress}%</p>
-        <div className={styles.progressBar}>
-          <div
-            className={styles.progressFill}
-            style={{ width: `${progress}%` }}
-          />
+      <div className={styles.cardDown}>
+        <h3 className={styles.title}>{course}</h3>
+        <div className={styles.info}>
+          <div className={styles.infoItem}>
+            <span>
+              <svg width="18" height="18">
+                <use href="/img/icon/Calendar.svg" />
+              </svg>
+            </span>
+            <span>25 дней</span>
+          </div>
+          <div className={styles.infoItem}>
+            <span>
+              <svg width="18" height="18">
+                <use width="18" height="18" href="/img/icon/Time.svg" />
+              </svg>
+            </span>
+            <span>20-50 мин/день</span>
+          </div>
+          <div className={styles.infoItem}>
+            <span>
+              <svg width="18" height="18">
+                <use href="/img/icon/Difficulty.svg" />
+              </svg>
+            </span>
+            <span>Сложность</span>
+          </div>
         </div>
+        <div className={styles.progressContainer}>
+          <p>Прогресс: {progress}%</p>
+          <div className={styles.progressBar}>
+            <div
+              className={styles.progressFill}
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        </div>
+        <button className={styles.actionButton}>{getButtonText()}</button>
       </div>
-      <button className={styles.actionButton}>{getButtonText()}</button>
     </div>
   );
 }

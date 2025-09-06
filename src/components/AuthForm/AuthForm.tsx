@@ -3,6 +3,9 @@
 import { useState, useRef, useEffect } from 'react';
 import styles from './authForm.module.css';
 import Link from 'next/link';
+import { loginUser, registerUser } from '../../api/auth/apiAuth';
+import { useAppDispatch } from '@/store/store';
+import { setAuthTokens } from '../../store/features/authSlice';
 
 type AuthFormProps = {
   onClose: () => void;
@@ -14,26 +17,55 @@ export default function AuthForm({ onClose }: AuthFormProps) {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
+  const dispatch = useAppDispatch();
   const modalRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
         onClose();
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [onClose]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     setError(null);
+    setIsLoading(true);
 
-    // ДОБАВИТЬ ЛОГИКУ АПИ
+    const body = { email, password };
+
+    try {
+      if (isLogin) {
+        const data = await loginUser(body);
+        dispatch(setAuthTokens({ token: data.token, email: email }));
+        onClose();
+      } else {
+        if (password !== repeatPassword) {
+          setError('Пароли не совпадают');
+          setIsLoading(false);
+          return;
+        }
+        await registerUser(body);
+        setIsLogin(true);
+        setPassword('');
+        setRepeatPassword('');
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Произошла неизвестная ошибка');
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -51,10 +83,11 @@ export default function AuthForm({ onClose }: AuthFormProps) {
           <div className={styles.inputs}>
             <input
               type="email"
-              placeholder="Логин"
+              placeholder="E-mail"
               className={styles.input}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <input
               type="password"
@@ -62,6 +95,7 @@ export default function AuthForm({ onClose }: AuthFormProps) {
               className={styles.input}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             {!isLogin && (
               <input
@@ -70,6 +104,7 @@ export default function AuthForm({ onClose }: AuthFormProps) {
                 className={styles.input}
                 value={repeatPassword}
                 onChange={(e) => setRepeatPassword(e.target.value)}
+                required
               />
             )}
           </div>
@@ -79,8 +114,12 @@ export default function AuthForm({ onClose }: AuthFormProps) {
           <div className={styles.buttons}>
             {isLogin ? (
               <>
-                <button type="submit" className={styles.buttonPrimary}>
-                  Войти
+                <button
+                  type="submit"
+                  className={styles.buttonPrimary}
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Вход...' : 'Войти'}
                 </button>
                 <button
                   type="button"
@@ -95,8 +134,12 @@ export default function AuthForm({ onClose }: AuthFormProps) {
               </>
             ) : (
               <>
-                <button type="submit" className={styles.buttonPrimary}>
-                  Зарегистрироваться
+                <button
+                  type="submit"
+                  className={styles.buttonPrimary}
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
                 </button>
                 <button
                   type="button"

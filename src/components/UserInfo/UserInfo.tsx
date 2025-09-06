@@ -10,7 +10,10 @@ export default function UserInfo({ email, onLogout }: UserProfileModal) {
   return (
     <div className={styles.menu}>
       <p className={styles.email}>{email}</p>
-      <Link href="/profile" className={`${styles.button} ${styles.primary}`}>
+      <Link
+        href="/fitness/profile"
+        className={`${styles.button} ${styles.primary}`}
+      >
         Мой профиль
       </Link>
       <button

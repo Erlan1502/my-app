@@ -1,4 +1,4 @@
-import styles from './page.module.css';
+import styles from './profile.module.css';
 import ProfileCourseCard from '@/components/ProfileCourseCard/profileCourseCard';
 
 export default function ProfilePage() {

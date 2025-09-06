@@ -15,11 +15,11 @@
 .title {
   font-size: 2rem;
   font-weight: 600;
-  padding: 20px 30px 10px;
+  padding: 0 0 20px;
 }
 
 .progressContainer {
-  padding: 0 30px 20px;
+  padding: 0 0 40px;
 }
 
 .progressBar {
@@ -37,12 +37,55 @@
 }
 
 .actionButton {
-  margin: 0 30px;
-  width: calc(100% - 60px);
+  margin: 0;
+  width: 100%;
   padding: 12px;
   border-radius: 46px;
   background: rgba(188, 236, 48, 1);
   border: none;
   cursor: pointer;
   font-size: 18px;
+}
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(32, 32, 32, 1);
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: left;
+  border-radius: 50px;
+  background: rgba(247, 247, 247, 1);
+  padding: 10px;
+}
+.infoItem svg {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+}
+.card {
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  position: relative;
+  width: 360px;
+  height: auto;
+}
+.info {
+  display: flex;
+  gap: 6px;
+  color: #666;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.cardDown {
+  margin-top: 20px;
+  margin-bottom: 15px;
+  margin-left: 30px;
+  margin-right: 30px;
 }

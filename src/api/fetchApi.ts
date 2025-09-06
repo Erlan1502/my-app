@@ -1,4 +1,4 @@
-const BASE_URL = '/api/fitness';
+const BASE_URL = 'https://wedev-api.sky.pro/api/fitness';
 
 export async function fetchApi<T>(
   url: string,

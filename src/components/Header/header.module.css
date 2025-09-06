@@ -68,18 +68,19 @@
 }
 
 .loginButton {
+  color: #000;
+  letter-spacing: 0;
+  text-align: center;
+  cursor: pointer;
+  background: #bcec30;
+  border-radius: 46px;
+  border: none;
   width: 103px;
   height: 52px;
-  border-radius: 46px;
-  background: rgba(188, 236, 48, 1);
-  color: rgba(0, 0, 0, 1);
   font-family: Roboto;
   font-size: 18px;
   font-weight: 400;
   line-height: 21px;
-  letter-spacing: 0px;
-  text-align: center;
-  cursor: pointer;
   transition: background-color 0.2s ease-in-out;
 }
 

@@ -1,4 +1,4 @@
-import styles from './page.module.css';
+import styles from './main.module.css';
 import CourseCard from '@/components/CourseCard/CourseCard';
 export default function HomePage() {
   return (

@@ -5,11 +5,22 @@ import Link from 'next/link';
 import styles from './header.module.css';
 import AuthForm from '../AuthForm/AuthForm';
 import UserInfo from '../UserInfo/UserInfo';
+import { useAppSelector, useAppDispatch } from '@/store/store';
+import { logout } from '@/store/features/authSlice';
 
 export default function Header() {
-  const isLoggedIn = true; // Временно
-  const userName = 'Сергей';
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isAuthenticated, email } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+
+  const [isAuthModalOpen, setAuthModalOpen] = useState(false);
+  const [isUserMenuOpen, setUserMenuOpen] = useState(false);
+
+  const userName = email;
+
+  const handleLogout = () => {
+    dispatch(logout());
+    setUserMenuOpen(false);
+  };
 
   return (
     <>
@@ -25,9 +36,12 @@ export default function Header() {
 
           <div className={styles.containerRight}>
             <nav>
-              {isLoggedIn ? (
-                <Link href="/fitness/profile" className={styles.logo}>
-                  <div className={styles.userProfile}>
+              {isAuthenticated ? (
+                <div className={styles.userProfileWrapper}>
+                  <div
+                    className={styles.userProfile}
+                    onClick={() => setUserMenuOpen(!isUserMenuOpen)}
+                  >
                     <div className={styles.avatar}>
                       <svg>
                         <use href="/img/icon/Profile.svg"></use>
@@ -38,12 +52,19 @@ export default function Header() {
                       <use href="/img/icon/DownChevron.svg"></use>
                     </svg>
                   </div>
-                </Link>
+                  {isUserMenuOpen && (
+                    <UserInfo
+                      email={email || 'email@example.com'}
+                      onLogout={handleLogout}
+                      selectedCourses={[]}
+                    />
+                  )}
+                </div>
               ) : (
                 <button
                   type="button"
                   className={styles.loginButton}
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => setAuthModalOpen(true)}
                 >
                   Войти
                 </button>
@@ -53,7 +74,7 @@ export default function Header() {
         </div>
       </header>
 
-      {isModalOpen && <AuthForm onClose={() => setIsModalOpen(false)} />}
+      {isAuthModalOpen && <AuthForm onClose={() => setAuthModalOpen(false)} />}
     </>
   );
 }

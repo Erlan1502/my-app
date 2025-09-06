@@ -1,10 +1,8 @@
 .container {
-  padding-top: 140px;
-  padding-bottom: 50px;
+  padding-top: 60px;
   max-width: 1280px;
   margin: 0 auto;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-bottom: 50px;
 }
 
 .loader,
@@ -17,24 +15,22 @@
 .hero {
   background-color: #f2f2f2;
   border-radius: 30px;
-  padding: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
   min-height: 250px;
 }
 
 .heroImage {
-  max-width: 100%;
-  max-height: 250px;
-  object-fit: contain;
+  width: 1160px;
+  max-height: 310px;
 }
 
 .title {
   font-size: 60px;
   font-weight: 400;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 .infoCards {
@@ -45,10 +41,31 @@
 }
 
 .card {
-  background-color: #f2f2f2;
-  border-radius: 20px;
-  padding: 30px;
+  padding: 20px;
   font-size: 24px;
+  border-radius: 28px;
+  background: var(
+    --dark-gradient,
+    linear-gradient(
+      152.61deg,
+      rgba(21.461162567138672, 23.483339309692383, 31.572021484375, 1),
+      rgba(30.28127670288086, 33.45381164550781, 46.14404296875, 1) 100%
+    )
+  );
+  display: flex;
+  gap: 25px;
+}
+.number {
+  color: rgba(188, 236, 48, 1);
+  font-family: Roboto;
+  font-size: 75px;
+  font-weight: 500;
+  line-height: 88px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+.description {
+  color: rgba(255, 255, 255, 1);
 }
 
 .card span {
@@ -63,40 +80,59 @@
 }
 
 .subTitle {
-  font-size: 40px;
-  font-weight: 400;
-  margin-bottom: 20px;
+  width: 398px;
+  margin-bottom: 28px;
+  color: rgba(0, 0, 0, 1);
+  font-family: Roboto;
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 70px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 
 .directionsGrid {
-  background-color: #f2f2f2;
-  border-radius: 30px;
   padding: 30px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  border-radius: 28px;
+  background: rgba(188, 236, 48, 1);
 }
 
 .directionItem {
   font-size: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.directionItem svg {
+  width: 26px;
+  height: 26px;
+  margin-top: 4px;
 }
 
 .startSection {
-  background-color: white;
-  border-radius: 30px;
   padding: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 30px;
+  border-radius: 30px;
+  box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
+  background: rgba(255, 255, 255, 1);
 }
 
 .benefitsList {
-  list-style: disc;
-  padding-left: 30px;
+  width: 437px;
+  color: rgba(0, 0, 0, 1);
+  font-family: Roboto;
   font-size: 24px;
-  line-height: 1.5;
-  margin-bottom: 30px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  text-align: left;
+  padding-bottom: 28px;
 }
 
 .startButton {

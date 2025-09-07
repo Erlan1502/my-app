@@ -52,3 +52,41 @@
   background: rgba(188, 236, 48, 1);
   cursor: pointer;
 }
+@media (max-width: 375px) {
+  .hero {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    flex-direction: column;
+  }
+
+  .title {
+    font-size: 32px;
+    line-height: 40px;
+    margin-bottom: 20px;
+  }
+
+  /* Скрываем декоративный элемент на мобильных */
+  .motivation {
+    display: none;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .description {
+    display: none;
+  }
+
+  .footer {
+    margin-top: 24px;
+    margin-bottom: 29px;
+    justify-content: flex-end;
+  }
+
+  .footerButton {
+    width: 147px;
+    font-size: 18px;
+  }
+}

@@ -8,6 +8,8 @@ import { getAllCourses } from '@/api/courses/apiCourses';
 import { Course } from '@/types/api';
 import { clearAuthData, getUserProfile } from '@/api/auth/apiAuth';
 import { getCourseProgress } from '@/api/workoutProgress/apiWorkoutProgress';
+import { handleScrollToTop } from '@/utils/utilMethods';
+import { useMobile } from '@/hooks/useMobile';
 
 type CourseWithProgress = Course & {
   progress: number;
@@ -30,7 +32,7 @@ export default function ProfilePage() {
   const [error, setError] = useState<string | null>(null);
 
   const [myCourses, setMyCourses] = useState<CourseWithProgress[]>([]);
-
+  const isMobile = useMobile('(max-width: 375px)');
   useEffect(() => {
     const fetchCourses = async () => {
       setIsLoading(true);
@@ -95,14 +97,30 @@ export default function ProfilePage() {
       <h1 className={styles.title}>Профиль</h1>
 
       <div className={styles.profileBlock}>
-        <div className={styles.avatar} />
+        {isMobile ? (
+          <div className={styles.profileBlockCenterAvatar}>
+            <svg>
+              <use href="/img/icon/MobileMask.svg"></use>
+            </svg>
+          </div>
+        ) : (
+          <div className={styles.avatar} />
+        )}
         <div className={styles.userInfo}>
           <h2>{email}</h2>
           <p>Логин: {email}</p>
+        </div>
+        {isMobile ? (
+          <div className={styles.logoutButtonCenter}>
+            <button className={styles.logoutButton} onClick={clearAuthData}>
+              Выйти
+            </button>
+          </div>
+        ) : (
           <button className={styles.logoutButton} onClick={clearAuthData}>
             Выйти
           </button>
-        </div>
+        )}
       </div>
 
       <h2 className={styles.coursesTitle}>Мои курсы</h2>
@@ -126,6 +144,15 @@ export default function ProfilePage() {
           />
         ))}
       </div>
+      {isMobile ? (
+        <div className={styles.footer}>
+          <div className={styles.footerButton} onClick={handleScrollToTop}>
+            Наверх ↑
+          </div>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 }

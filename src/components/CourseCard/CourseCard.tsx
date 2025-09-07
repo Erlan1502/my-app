@@ -61,12 +61,9 @@ export default function CourseCard({
           </div>
           <div className={styles.infoItem}>
             <span>
-              {difficulty === 'сложный' ? (
-                <svg>
-                  <use href="/img/icon/Difficulty.svg" />
-                </svg>
-              ) : null}{' '}
-              {/*ВОЗМОЖНО ДОБАВИМ РАЗНЫЕ СЛОЖНОСТИ*/}
+              <svg>
+                <use href="/img/icon/Difficulty.svg" />
+              </svg>
             </span>
             <span>Сложность</span>
           </div>

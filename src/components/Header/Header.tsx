@@ -9,6 +9,7 @@ import { useAppSelector, useAppDispatch } from '@/store/store';
 import { logout } from '@/store/features/authSlice';
 import { useInitAuth } from '@/hooks/useInitAuth';
 import { clearAuthData } from '@/api/auth/apiAuth';
+import { useMobile } from '@/hooks/useMobile';
 
 export default function Header() {
   useInitAuth();
@@ -18,6 +19,7 @@ export default function Header() {
 
   const [isAuthModalOpen, setAuthModalOpen] = useState(false);
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
+  const isMobile = useMobile('(max-width: 375px)');
 
   const userName = email;
 
@@ -48,14 +50,26 @@ export default function Header() {
                     onClick={() => setUserMenuOpen(!isUserMenuOpen)}
                   >
                     <div className={styles.avatar}>
+                      {!isMobile ? (
+                        <svg>
+                          <use href="/img/icon/Profile.svg"></use>
+                        </svg>
+                      ) : (
+                        <svg>
+                          <use href="/img/icon/Profile.svg"></use>
+                        </svg>
+                      )}
+                    </div>
+                    <div className={styles.downChevron}>
+                      {!isMobile ? (
+                        <span className="userName">{userName}</span>
+                      ) : (
+                        ''
+                      )}
                       <svg>
-                        <use href="/img/icon/Profile.svg"></use>
+                        <use href="/img/icon/DownChevron.svg"></use>
                       </svg>
                     </div>
-                    <span className={styles.userName}>{userName}</span>
-                    <svg>
-                      <use href="/img/icon/DownChevron.svg"></use>
-                    </svg>
                   </div>
                   {isUserMenuOpen && (
                     <UserInfo

@@ -87,3 +87,23 @@
 .loginButton:hover {
   background-color: #bef264;
 }
+@media (max-width: 375px) {
+  .container {
+    margin-top: 40px;
+  }
+  .loginButton {
+    width: 83px;
+    height: 36px;
+  }
+  .avatar {
+    width: 36px;
+    height: 36px;
+  }
+  .downChevron {
+    width: 8px;
+    height: 4px;
+  }
+  .userProfile {
+    align-items: baseline;
+  }
+}

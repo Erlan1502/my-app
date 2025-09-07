@@ -3,6 +3,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { Exercise } from '@/types/api';
 import styles from './myProgressForm.module.css';
+import { useParams } from 'next/navigation';
+import { useAppSelector } from '@/store/store';
+import { saveWorkoutProgress } from '@/api/workoutProgress/apiWorkoutProgress';
 
 type MyProgressFormProps = {
   exercises: Exercise[];
@@ -17,6 +20,8 @@ export default function MyProgressForm({
   onClose,
   onSave,
 }: MyProgressFormProps) {
+  const params = useParams<{ id: string; workoutId: string }>();
+
   const modalRef = useRef<HTMLDivElement>(null);
 
   const [progressInputs, setProgressInputs] =
@@ -32,15 +37,37 @@ export default function MyProgressForm({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [onClose]);
 
-  const handleInputChange = (index: number, value: string) => {
-    const newInputs = [...progressInputs];
+  const handleInputChange = (
+    index: number,
+    value: string,
+    quantity: number
+  ) => {
     const numericValue = parseInt(value, 10);
-    newInputs[index] = isNaN(numericValue) ? 0 : numericValue;
-    setProgressInputs(newInputs);
+    const preparedValue = isNaN(numericValue) ? 0 : numericValue;
+
+    if (preparedValue <= quantity) {
+      setProgressInputs((current) => {
+        const newValue = [...current];
+
+        newValue[index] = preparedValue;
+        return newValue;
+      });
+    }
   };
 
+  const { token } = useAppSelector((state) => state.auth);
+
   const handleSave = () => {
-    onSave(progressInputs);
+    if (token) {
+      saveWorkoutProgress(
+        params.id,
+        params.workoutId,
+        progressInputs,
+        token
+      ).then(() => {
+        onSave(progressInputs);
+      });
+    }
   };
 
   return (
@@ -54,10 +81,11 @@ export default function MyProgressForm({
                 {`Сколько раз вы сделали ${exercise.name.toLowerCase()}?`}
               </label>
               <input
-                type="number"
                 className={styles.input}
                 value={progressInputs[index]}
-                onChange={(e) => handleInputChange(index, e.target.value)}
+                onChange={(e) =>
+                  handleInputChange(index, e.target.value, exercise.quantity)
+                }
               />
             </div>
           ))}

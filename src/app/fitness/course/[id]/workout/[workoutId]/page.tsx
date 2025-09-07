@@ -1,30 +1,37 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Workout } from '@/types/api';
 import styles from './workout.module.css';
-import MyProgressForm from '../../../../components/MyProgressForm/MyProgressForm';
-
-const mockWorkoutData: Workout = {
-  _id: 'mock123',
-  name: 'Йога',
-  video: 'https://www.youtube.com/embed/Jom-jxUEqJg',
-  exercises: [
-    { _id: 'ex1', name: 'Наклоны вперед', quantity: 10 },
-    { _id: 'ex2', name: 'Наклоны назад', quantity: 10 },
-    { _id: 'ex3', name: 'Поднятие ног, согнутых в коленях', quantity: 15 },
-    { _id: 'ex4', name: 'Крендель', quantity: 10 },
-    { _id: 'ex5', name: 'Скручивания', quantity: 20 },
-    { _id: 'ex6', name: 'Пресс', quantity: 15 },
-  ],
-};
+import MyProgressForm from '@/components/MyProgressForm/MyProgressForm';
+import { getWorkoutById } from '@/api/workoutProgress/apiWorkoutProgress';
+import { useParams } from 'next/navigation';
+import { useAppSelector } from '@/store/store';
 
 export default function WorkoutPage() {
-  const [workoutData] = useState<Workout | null>(mockWorkoutData);
+  const params = useParams<{ id: string; workoutId: string }>();
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [workoutData, setWorkoutData] = useState<Workout | null>(null);
   const [progressValues, setProgressValues] = useState<number[]>(
-    new Array(mockWorkoutData.exercises.length).fill(0)
+    []
   );
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
+
+  const { token } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (token) {
+      getWorkoutById(params.workoutId, token).then((response) => {
+        setWorkoutData(response);
+        setProgressValues(new Array(response.exercises.length).fill(0))
+      }).finally(() => setIsLoading(false));
+    }
+  }, [params.workoutId, token])
+
+  if (isLoading) {
+    return <div className={styles.loader}>Загрузка...</div>;
+  }
 
   if (!workoutData) {
     return <div className={styles.error}>Тренировка не найдена</div>;

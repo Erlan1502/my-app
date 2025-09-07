@@ -92,7 +92,7 @@ export default function ProgressForm({
             )
           })}
         </div>
-        <Link href={`/fitness/workout/${selectedWorkout}`}>
+        <Link href={`/fitness/course/${courseId}/workout/${selectedWorkout}`}>
           <div className={styles.saveButton}>
             Начать
           </div>

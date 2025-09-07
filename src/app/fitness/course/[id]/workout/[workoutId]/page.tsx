@@ -9,6 +9,7 @@ import { getWorkoutById } from '@/api/workoutProgress/apiWorkoutProgress';
 import { useParams } from 'next/navigation';
 import { useAppSelector } from '@/store/store';
 import { getCourseById } from '@/api/courses/apiCourses';
+import { useMobile } from '@/hooks/useMobile';
 
 export default function WorkoutPage() {
   const params = useParams<{ id: string; workoutId: string }>();
@@ -18,7 +19,7 @@ export default function WorkoutPage() {
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [courseName, setCourseName] = useState('');
-
+  const isMobile = useMobile('(max-width: 375px)');
   const { token } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
@@ -26,31 +27,34 @@ export default function WorkoutPage() {
   }, [params.id]);
 
   useEffect(() => {
-    if (token && params.workoutId) {
-      getWorkoutById(params.workoutId, token)
-        .then((response) => {
-          setWorkoutData(response);
-
-          const savedProgressJSON = localStorage.getItem(
-            `workoutProgress_${params.workoutId}`
-          );
-          if (savedProgressJSON) {
-            const savedProgress = JSON.parse(savedProgressJSON);
-            if (savedProgress.length === response.exercises.length) {
-              setProgressValues(savedProgress);
-            } else {
-              setProgressValues(new Array(response.exercises.length).fill(0));
-            }
+    if (!token || !params.workoutId) {
+      return;
+    }
+    getWorkoutById(params.workoutId, token)
+      .then((response) => {
+        setWorkoutData(response);
+        const savedProgressJSON = localStorage.getItem(
+          `workoutProgress_${params.workoutId}`
+        );
+        if (savedProgressJSON) {
+          const savedProgress = JSON.parse(savedProgressJSON);
+          if (savedProgress.length === response.exercises.length) {
+            setProgressValues(savedProgress);
           } else {
             setProgressValues(new Array(response.exercises.length).fill(0));
           }
-        })
-        .finally(() => setIsLoading(false));
-    } else {
-      setIsLoading(false);
-    }
+        } else {
+          setProgressValues(new Array(response.exercises.length).fill(0));
+        }
+      })
+      .catch((error) => {
+        console.error('Ошибка при загрузке тренировки:', error);
+        setWorkoutData(null);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [params.workoutId, token]);
-
   if (isLoading) {
     return <div className={styles.loader}>Загрузка...</div>;
   }
@@ -87,14 +91,25 @@ export default function WorkoutPage() {
       <div className={styles.container}>
         <h1 className={styles.title}>{courseName}</h1>
         <div className={styles.videoPlayerContainer}>
-          <iframe
-            src={workoutData.video}
-            className={styles.videoPlayer}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title={workoutData.name}
-            style={{ border: 0, width: '100%', height: '650px' }}
-          ></iframe>
+          {isMobile ? (
+            <iframe
+              src={workoutData.video}
+              className={styles.videoPlayer}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title={workoutData.name}
+              style={{ border: 0, width: '100%', height: '189px', zIndex: 10 }}
+            ></iframe>
+          ) : (
+            <iframe
+              src={workoutData.video}
+              className={styles.videoPlayer}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title={workoutData.name}
+              style={{ border: 0, width: '100%', height: '650px', zIndex: 10 }}
+            ></iframe>
+          )}
         </div>
         <div className={styles.exercisesBlock}>
           <h2 className={styles.exercisesTitle}>{workoutData.name}</h2>

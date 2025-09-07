@@ -29,3 +29,12 @@
   font-weight: 400;
   text-align: center;
 }
+@media (max-width: 375px) {
+  .modalOverlay {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .modalContent {
+    padding: 40px;
+  }
+}

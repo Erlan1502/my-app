@@ -9,6 +9,8 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .modalContent {

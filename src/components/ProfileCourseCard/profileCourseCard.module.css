@@ -4,6 +4,16 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   background-color: white;
   padding-bottom: 30px;
+  position: relative;
+}
+
+.remove {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
 }
 
 .image {

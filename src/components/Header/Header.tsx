@@ -7,8 +7,12 @@ import AuthForm from '../AuthForm/AuthForm';
 import UserInfo from '../UserInfo/UserInfo';
 import { useAppSelector, useAppDispatch } from '@/store/store';
 import { logout } from '@/store/features/authSlice';
+import { useInitAuth } from '@/hooks/useInitAuth';
+import { clearAuthData } from '@/api/auth/apiAuth';
 
 export default function Header() {
+  useInitAuth();
+
   const { isAuthenticated, email } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
@@ -20,6 +24,7 @@ export default function Header() {
   const handleLogout = () => {
     dispatch(logout());
     setUserMenuOpen(false);
+    clearAuthData();
   };
 
   return (

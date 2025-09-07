@@ -23,3 +23,8 @@ export const getUserProfile = async (token: string): Promise<UserProfile> => {
     headers: { Authorization: `Bearer ${token}` },
   });
 };
+
+export const clearAuthData = () => {
+  localStorage.removeItem('username');
+  localStorage.removeItem('token');
+};

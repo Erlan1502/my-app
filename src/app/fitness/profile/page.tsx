@@ -6,7 +6,7 @@ import { useAppSelector } from '@/store/store';
 import { useEffect, useState } from 'react';
 import { getAllCourses } from '@/api/courses/apiCourses';
 import { Course } from '@/types/api';
-import { getUserProfile } from '@/api/auth/apiAuth';
+import { clearAuthData, getUserProfile } from '@/api/auth/apiAuth';
 import { getCourseProgress } from '@/api/workoutProgress/apiWorkoutProgress';
 
 type CourseWithProgress = Course & {
@@ -86,6 +86,10 @@ export default function ProfilePage() {
     fetchCourses();
   }, [allCourses, token]);
 
+  const removeCourse = (id: string) => {
+    setMyCourses((courses) => courses.filter(course => course._id !== id));
+  }
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Профиль</h1>
@@ -95,7 +99,7 @@ export default function ProfilePage() {
         <div className={styles.userInfo}>
           <h2>Сергей</h2>
           <p>Логин: {email}</p>
-          <button className={styles.logoutButton}>Выйти</button>
+          <button className={styles.logoutButton} onClick={clearAuthData}>Выйти</button>
         </div>
       </div>
 
@@ -115,6 +119,8 @@ export default function ProfilePage() {
             dailyDurationInMinutes={course.dailyDurationInMinutes}
             difficulty={course.difficulty}
             progress={course.progress}
+            courseId={course._id}
+            onRemoved={removeCourse}
           />
         ))}
       </div>

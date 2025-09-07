@@ -1,9 +1,17 @@
+'use client';
+
 import Image from 'next/image';
 import styles from './profileCourseCard.module.css';
 import { CourseDetailsStatic } from '@/types/api';
+import { deleteUserCourse } from '@/api/courses/apiCourses';
+import { useAppSelector } from '@/store/store';
+import { useState } from 'react';
+import ProgressForm from '@/components/ProgressForm/ProgressForm';
 
 type ProfileCourseCardProps = CourseDetailsStatic & {
   progress: number;
+  onRemoved: (id: string) => void;
+  courseId: string;
 };
 
 export default function ProfileCourseCard({
@@ -13,6 +21,8 @@ export default function ProfileCourseCard({
   difficulty,
   imageUrl,
   progress,
+  courseId,
+  onRemoved
 }: ProfileCourseCardProps) {
   const getButtonText = () => {
     if (progress === 100) return 'Начать заново';
@@ -20,8 +30,28 @@ export default function ProfileCourseCard({
     return 'Начать тренировки';
   };
 
+  const { token } = useAppSelector((state) => state.auth);
+
+  const removeCourse = async () => {
+    if (token) {
+      deleteUserCourse(courseId, token).then(() => {
+        onRemoved(courseId);
+      });
+    }
+  }
+
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+  }
+
   return (
     <div className={styles.card}>
+      <svg className={styles.remove} onClick={removeCourse}>
+        <use href="/img/icon/Remove.svg" />
+      </svg>
+
       <Image
         src={imageUrl ? imageUrl : ''}
         alt={nameRU}
@@ -71,8 +101,10 @@ export default function ProfileCourseCard({
             />
           </div>
         </div>
-        <button className={styles.actionButton}>{getButtonText()}</button>
+        <button className={styles.actionButton} onClick={openModal}>{getButtonText()}</button>
       </div>
+
+      {showModal && (<ProgressForm  onClose={() => setShowModal(false)} courseId={courseId} />)}
     </div>
   );
 }

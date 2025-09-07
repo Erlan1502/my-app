@@ -44,6 +44,9 @@ export default function AuthForm({ onClose }: AuthFormProps) {
     try {
       if (isLogin) {
         const data = await loginUser(body);
+        localStorage.setItem('username', email);
+        localStorage.setItem('token', data.token);
+
         dispatch(setAuthTokens({ token: data.token, email: email }));
         onClose();
       } else {

@@ -20,11 +20,24 @@ export default function WorkoutPage() {
   const { token } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    if (token) {
+    if (token && params.workoutId) {
       getWorkoutById(params.workoutId, token)
         .then((response) => {
           setWorkoutData(response);
-          setProgressValues(new Array(response.exercises.length).fill(0));
+
+          const savedProgressJSON = localStorage.getItem(
+            `workoutProgress_${params.workoutId}`
+          );
+          if (savedProgressJSON) {
+            const savedProgress = JSON.parse(savedProgressJSON);
+            if (savedProgress.length === response.exercises.length) {
+              setProgressValues(savedProgress);
+            } else {
+              setProgressValues(new Array(response.exercises.length).fill(0));
+            }
+          } else {
+            setProgressValues(new Array(response.exercises.length).fill(0));
+          }
         })
         .finally(() => setIsLoading(false));
     } else {
@@ -40,15 +53,28 @@ export default function WorkoutPage() {
     return <div className={styles.error}>Тренировка не найдена</div>;
   }
 
+  // Обновление и запись в локалстор
   const handleSaveProgress = (newProgress: number[]) => {
     setProgressValues(newProgress);
     setIsProgressModalOpen(false);
-    setShowSuccessModal(true);
 
+    if (params.workoutId) {
+      localStorage.setItem(
+        `workoutProgress_${params.workoutId}`,
+        JSON.stringify(newProgress)
+      );
+    }
+
+    setShowSuccessModal(true);
     setTimeout(() => {
       setShowSuccessModal(false);
     }, 1500);
   };
+
+  const hasProgress = progressValues.some((value) => value > 0);
+  const buttonText = hasProgress
+    ? 'Обновить свой прогресс'
+    : 'Заполнить свой прогресс';
 
   return (
     <>
@@ -94,7 +120,7 @@ export default function WorkoutPage() {
             className={styles.actionButton}
             onClick={() => setIsProgressModalOpen(true)}
           >
-            Заполнить свой прогресс
+            {buttonText}
           </button>
         </div>
       </div>

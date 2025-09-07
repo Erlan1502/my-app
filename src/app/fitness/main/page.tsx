@@ -47,6 +47,13 @@ export default function HomePage() {
     }
   }, [dispatch, allCourses.length]);
 
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   const renderContent = () => {
     if (isLoading) {
       return <p>Загрузка курсов...</p>;
@@ -92,7 +99,9 @@ export default function HomePage() {
       {renderContent()}
 
       <div className={styles.footer}>
-        <div className={styles.footerButton}>Наверх ↑</div>
+        <div className={styles.footerButton} onClick={handleScrollToTop}>
+          Наверх ↑
+        </div>
       </div>
     </div>
   );

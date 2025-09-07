@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Workout } from '@/types/api';
 import styles from './workout.module.css';
 import MyProgressForm from '@/components/MyProgressForm/MyProgressForm';
+import SuccessModal from '@/components/SuccessModal/SuccessModal';
 import { getWorkoutById } from '@/api/workoutProgress/apiWorkoutProgress';
 import { useParams } from 'next/navigation';
 import { useAppSelector } from '@/store/store';
@@ -14,6 +15,7 @@ export default function WorkoutPage() {
   const [workoutData, setWorkoutData] = useState<Workout | null>(null);
   const [progressValues, setProgressValues] = useState<number[]>([]);
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const { token } = useAppSelector((state) => state.auth);
 
@@ -25,6 +27,8 @@ export default function WorkoutPage() {
           setProgressValues(new Array(response.exercises.length).fill(0));
         })
         .finally(() => setIsLoading(false));
+    } else {
+      setIsLoading(false);
     }
   }, [params.workoutId, token]);
 
@@ -39,12 +43,12 @@ export default function WorkoutPage() {
   const handleSaveProgress = (newProgress: number[]) => {
     setProgressValues(newProgress);
     setIsProgressModalOpen(false);
-  };
+    setShowSuccessModal(true);
 
-  const hasProgress = progressValues.some((value) => value > 0);
-  const buttonText = hasProgress
-    ? 'Обновить свой прогресс'
-    : 'Заполнить свой прогресс';
+    setTimeout(() => {
+      setShowSuccessModal(false);
+    }, 1500);
+  };
 
   return (
     <>
@@ -90,7 +94,7 @@ export default function WorkoutPage() {
             className={styles.actionButton}
             onClick={() => setIsProgressModalOpen(true)}
           >
-            {buttonText}
+            Заполнить свой прогресс
           </button>
         </div>
       </div>
@@ -102,6 +106,7 @@ export default function WorkoutPage() {
           onSave={handleSaveProgress}
         />
       )}
+      {showSuccessModal && <SuccessModal />}
     </>
   );
 }

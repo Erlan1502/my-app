@@ -22,7 +22,7 @@ export default function ProfileCourseCard({
   imageUrl,
   progress,
   courseId,
-  onRemoved
+  onRemoved,
 }: ProfileCourseCardProps) {
   const getButtonText = () => {
     if (progress === 100) return 'Начать заново';
@@ -38,13 +38,13 @@ export default function ProfileCourseCard({
         onRemoved(courseId);
       });
     }
-  }
+  };
 
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
     setShowModal(true);
-  }
+  };
 
   return (
     <div className={styles.card}>
@@ -82,12 +82,9 @@ export default function ProfileCourseCard({
           </div>
           <div className={styles.infoItem}>
             <span>
-              {difficulty === 'сложный' ? (
-                <svg>
-                  <use href="/img/icon/Difficulty.svg" />
-                </svg>
-              ) : null}{' '}
-              {/*ВОЗМОЖНО ДОБАВИМ РАЗНЫЕ СЛОЖНОСТИ*/}
+              <svg>
+                <use href="/img/icon/Difficulty.svg" />
+              </svg>
             </span>
             <span>Сложность</span>
           </div>
@@ -101,10 +98,14 @@ export default function ProfileCourseCard({
             />
           </div>
         </div>
-        <button className={styles.actionButton} onClick={openModal}>{getButtonText()}</button>
+        <button className={styles.actionButton} onClick={openModal}>
+          {getButtonText()}
+        </button>
       </div>
 
-      {showModal && (<ProgressForm  onClose={() => setShowModal(false)} courseId={courseId} />)}
+      {showModal && (
+        <ProgressForm onClose={() => setShowModal(false)} courseId={courseId} />
+      )}
     </div>
   );
 }

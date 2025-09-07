@@ -62,7 +62,7 @@ export default function ProfilePage() {
               let progress = 0;
 
               if (courseProgress && courseProgress.workoutsProgress) {
-                const workoutCount = courseProgress.workoutsProgress.length;
+                const workoutCount = course.workouts.length;
                 const completedCount = courseProgress.workoutsProgress.filter(
                   ({ workoutCompleted }) => workoutCompleted
                 ).length;

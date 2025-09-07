@@ -8,6 +8,7 @@ import SuccessModal from '@/components/SuccessModal/SuccessModal';
 import { getWorkoutById } from '@/api/workoutProgress/apiWorkoutProgress';
 import { useParams } from 'next/navigation';
 import { useAppSelector } from '@/store/store';
+import { getCourseById } from '@/api/courses/apiCourses';
 
 export default function WorkoutPage() {
   const params = useParams<{ id: string; workoutId: string }>();
@@ -16,8 +17,13 @@ export default function WorkoutPage() {
   const [progressValues, setProgressValues] = useState<number[]>([]);
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [courseName, setCourseName] = useState('');
 
   const { token } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    getCourseById(params.id).then((course) => setCourseName(course.nameRU));
+  }, [params.id]);
 
   useEffect(() => {
     if (token && params.workoutId) {
@@ -79,7 +85,7 @@ export default function WorkoutPage() {
   return (
     <>
       <div className={styles.container}>
-        <h1 className={styles.title}>{workoutData.name}</h1>
+        <h1 className={styles.title}>{courseName}</h1>
         <div className={styles.videoPlayerContainer}>
           <iframe
             src={workoutData.video}

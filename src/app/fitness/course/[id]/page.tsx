@@ -9,6 +9,7 @@ import { getUserProfile } from '@/api/auth/apiAuth';
 import { CourseDetails } from '@/types/api';
 import { useAppSelector } from '@/store/store';
 import AuthForm from '@/components/AuthForm/AuthForm';
+import Link from 'next/link';
 
 const courseImages: { [key: string]: { hero: string; start: string } } = {
   Yoga: {
@@ -55,7 +56,7 @@ export default function CoursePage() {
 
         if (token) {
           const userProfile = await getUserProfile(token);
-          console.log(userProfile);
+
           if (userProfile.user.selectedCourses.includes(params.id as string)) {
             setIsCourseAdded(true);
           }
@@ -82,13 +83,13 @@ export default function CoursePage() {
 
     try {
       await addUserCourse(params.id as string, token);
+      setIsCourseAdded(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Не удалось добавить курс');
     }
   };
 
   const getButtonText = () => {
-    if (isCourseAdded) return 'Перейти в профиль';
     if (isAuthenticated) return 'Добавить курс';
     return 'Войдите, чтобы добавить курс';
   };
@@ -164,13 +165,17 @@ export default function CoursePage() {
                 помогают противостоять стрессам
               </li>
             </ul>
-            <button
-              className={styles.startButton}
-              onClick={handleAddCourse}
-              disabled={isCourseAdded}
-            >
-              {getButtonText()}
-            </button>
+            {isCourseAdded ? (
+              <Link href="/fitness/profile">
+                <button className={styles.startButton}>
+                  Перейти в профиль
+                </button>
+              </Link>
+            ) : (
+              <button className={styles.startButton} onClick={handleAddCourse}>
+                {getButtonText()}
+              </button>
+            )}
           </div>
           <div className={styles.absoluteImage1}>
             <Image

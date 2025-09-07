@@ -1,6 +1,11 @@
 import Image from 'next/image';
 import styles from '@/components/CourseCard/courseCard.module.css';
 import { CourseDetailsStatic } from '@/types/api';
+import { addUserCourse } from '@/api/courses/apiCourses';
+import { useAppSelector } from '@/store/store';
+import { MouseEvent } from 'react';
+
+type CourseCard = CourseDetailsStatic & { courseId: string };
 
 export default function CourseCard({
   nameRU,
@@ -8,10 +13,23 @@ export default function CourseCard({
   durationInDays,
   dailyDurationInMinutes,
   imageUrl,
-}: CourseDetailsStatic) {
+  courseId,
+}: CourseCard) {
+  const { token } = useAppSelector((state) => state.auth);
+
+  const addCourse = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    if (token) {
+      addUserCourse(courseId, token);
+    }
+  };
+
   return (
     <div className={styles.card}>
-      <button className={styles.plusButton}>+</button>
+      <button className={styles.plusButton} onClick={addCourse}>
+        +
+      </button>
       <Image
         src={imageUrl ? imageUrl : ''}
         alt={nameRU}

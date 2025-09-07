@@ -73,6 +73,7 @@ export default function HomePage() {
               durationInDays={course.durationInDays}
               dailyDurationInMinutes={course.dailyDurationInMinutes}
               difficulty={course.difficulty}
+              courseId={course._id}
             />
           </Link>
         ))}

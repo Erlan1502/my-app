@@ -98,7 +98,7 @@ export default function WorkoutPage() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               title={workoutData.name}
-              style={{ border: 0, width: '100%', height: '189px', zIndex: 10 }}
+              style={{ border: 0, width: '100%', height: '189px', zIndex: -1 }}
             ></iframe>
           ) : (
             <iframe
@@ -107,7 +107,7 @@ export default function WorkoutPage() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               title={workoutData.name}
-              style={{ border: 0, width: '100%', height: '650px', zIndex: 10 }}
+              style={{ border: 0, width: '100%', height: '650px', zIndex: -1 }}
             ></iframe>
           )}
         </div>

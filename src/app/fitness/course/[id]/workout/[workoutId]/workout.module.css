@@ -134,4 +134,7 @@
   .actionButton {
     width: 100%;
   }
+  .exercisesGrid {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

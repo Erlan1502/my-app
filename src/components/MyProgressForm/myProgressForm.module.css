@@ -73,3 +73,12 @@
   font-size: 18px;
   color: #000;
 }
+@media (max-width: 375px) {
+  .modalOverlay {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .label {
+    font-size: 16px;
+  }
+}

@@ -10,7 +10,8 @@ import { CourseDetails } from '@/types/api';
 import { useAppSelector } from '@/store/store';
 import AuthForm from '@/components/AuthForm/AuthForm';
 import Link from 'next/link';
-import { courseImages } from '@/utils/images';
+import { courseImages, courseImagesMobile } from '@/utils/images';
+import { useMobile } from '@/hooks/useMobile';
 
 export default function CoursePage() {
   const params = useParams<{ id: string }>();
@@ -21,7 +22,7 @@ export default function CoursePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isAuthModalOpen, setAuthModalOpen] = useState(false);
-
+  const isMobile = useMobile('(max-width: 375px)');
   useEffect(() => {
     if (!params.id) return;
 
@@ -84,25 +85,42 @@ export default function CoursePage() {
     return <div className={styles.error}>Курс не найден</div>;
   }
 
-  const images = courseImages[courseData.nameEN] || {
-    hero: '/img/default-hero.png',
-    start: '/img/default-start.png',
-  };
+  const images = isMobile
+    ? courseImagesMobile[courseData.nameEN]
+    : courseImages[courseData.nameEN];
 
   return (
     <>
       <div className={styles.container}>
         <div className={styles.hero}>
-          <Image
-            src={images.hero}
-            alt={courseData.nameRU}
-            width={800}
-            height={250}
-            className={styles.heroImage}
-          />
+          {isMobile ? (
+            <Image
+              src={images.hero}
+              alt={courseData.nameRU}
+              width={360}
+              height={310}
+              className={styles.heroImage}
+              style={{
+                width: '100%',
+                height: 'auto',
+                borderRadius: '30px',
+              }}
+            />
+          ) : (
+            <Image
+              src={images.hero}
+              alt={courseData.nameRU}
+              width={800}
+              height={250}
+              className={styles.heroImage}
+            />
+          )}
         </div>
-
-        <h1 className={styles.title}>{courseData.nameRU}</h1>
+        {isMobile ? (
+          <h1 className={styles.title}>Подойдет для вас если:</h1>
+        ) : (
+          <h1 className={styles.title}>{courseData.nameRU}</h1>
+        )}
 
         <div className={styles.infoCards}>
           {courseData.fitting.map((item, index) => (
@@ -114,7 +132,7 @@ export default function CoursePage() {
         </div>
 
         <div className={styles.directions}>
-          <h2 className={styles.subTitle}>Направления</h2>
+          <p className={styles.subTitle}>Направления</p>
           <div className={styles.directionsGrid}>
             {courseData.directions.map((dir) => (
               <div key={dir} className={styles.directionItem}>
@@ -143,7 +161,7 @@ export default function CoursePage() {
                 помогают противостоять стрессам
               </li>
             </ul>
-            {isCourseAdded ? (
+            {isCourseAdded && token ? (
               <Link href="/fitness/profile">
                 <button className={styles.startButton}>
                   Перейти в профиль
@@ -156,21 +174,39 @@ export default function CoursePage() {
             )}
           </div>
           <div className={styles.absoluteImage1}>
-            <Image
-              src="/img/Man-ready.png"
-              alt="Мужчина занимается йогой"
-              width={520}
-              height={530}
-            />
+            {isMobile ? (
+              <Image
+                src="/img/Man-ready.png"
+                alt="Мужчина на старте"
+                width={334}
+                height={347}
+              />
+            ) : (
+              <Image
+                src="/img/Man-ready.png"
+                alt="Мужчина на старте"
+                width={520}
+                height={530}
+              />
+            )}
           </div>
           <div className={styles.clippingWrapper}>
             <div className={styles.absoluteImage2}>
-              <Image
-                src="/img/Style-Man-ready.svg"
-                alt="Стильная линия для мужчины"
-                width={600}
-                height={600}
-              />
+              {isMobile ? (
+                <Image
+                  src="/img/Style-Man-ready.svg"
+                  alt="Стильная линия для мужчины"
+                  width={600}
+                  height={600}
+                />
+              ) : (
+                <Image
+                  src="/img/Style-Man-ready.svg"
+                  alt="Стильная линия для мужчины"
+                  width={600}
+                  height={600}
+                />
+              )}
             </div>
           </div>
         </div>

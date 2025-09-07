@@ -58,6 +58,8 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border: 1px solid black;
+  border-radius: 50%;
 }
 
 .checkIcon {
@@ -84,4 +86,13 @@
   text-align: left;
   justify-content: center;
   align-items: center;
+}
+@media (max-width: 375px) {
+  .title {
+    text-align: left;
+    font-size: 32px;
+  }
+  .workoutName {
+    font-size: 18px;
+  }
 }

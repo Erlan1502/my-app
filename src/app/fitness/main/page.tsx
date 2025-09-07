@@ -12,14 +12,7 @@ import {
 import styles from './main.module.css';
 import CourseCard from '@/components/CourseCard/CourseCard';
 import { Course } from '@/types/api';
-
-const courseImages: { [key: string]: string } = {
-  Yoga: '/img/Yoga.png',
-  Stretching: '/img/Stretching.png',
-  Fitness: '/img/Fitness.png',
-  StepAirobic: '/img/Step-aerobic.png',
-  BodyFlex: '/img/Body-flex.png',
-};
+import { courseImagesMain } from '@/utils/images';
 
 export default function HomePage() {
   const dispatch = useAppDispatch();
@@ -69,7 +62,7 @@ export default function HomePage() {
           <Link href={`/fitness/course/${course._id}`} key={course._id}>
             <CourseCard
               nameRU={course.nameRU}
-              imageUrl={courseImages[course.nameEN]}
+              imageUrl={courseImagesMain[course.nameEN]}
               durationInDays={course.durationInDays}
               dailyDurationInMinutes={course.dailyDurationInMinutes}
               difficulty={course.difficulty}

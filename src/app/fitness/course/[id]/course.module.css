@@ -187,3 +187,72 @@
   max-width: 400px;
   height: auto;
 }
+@media (max-width: 375px) {
+  .hero {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+  .title {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+  .infoCards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .description {
+    color: rgba(255, 255, 255, 1);
+    font-size: 18px;
+  }
+  .card {
+    align-items: center;
+  }
+  .infoCards {
+    margin-bottom: 40px;
+  }
+  .subTitle {
+    font-size: 24px;
+    line-height: 28px;
+    margin-bottom: 24px;
+  }
+  .motivation > .subTitle {
+    font-size: 32px;
+    width: 100%;
+  }
+  .directions {
+    margin-bottom: 156px;
+  }
+  .directionsGrid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+  }
+  .absoluteImage1 {
+    top: -250px;
+    right: -75px;
+    z-index: -1;
+  }
+  .absoluteImage2 {
+    top: -250px;
+    right: -175px;
+  }
+  .motivation {
+    width: 100%;
+  }
+  .benefitsList {
+    width: 100%;
+    padding: 0;
+    padding-bottom: 28px;
+  }
+  .benefitItem {
+    font-size: 18px;
+  }
+  .startButton {
+    font-size: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .startSection {
+    padding: 30px;
+  }
+}

@@ -72,3 +72,8 @@
   cursor: pointer;
   line-height: 1;
 }
+@media (max-width: 375px) {
+  .card {
+    width: 100%;
+  }
+}

@@ -8,18 +8,15 @@ import { getCourseWorkouts } from '@/api/courses/apiCourses';
 import { useAppSelector } from '@/store/store';
 import { getCourseProgress } from '@/api/workoutProgress/apiWorkoutProgress';
 import Link from 'next/link';
-
+import { useMobile } from '@/hooks/useMobile';
 type ProgressFormProps = {
   courseId: string;
   onClose: () => void;
 };
 
-export default function ProgressForm({
-  courseId,
-  onClose,
-}: ProgressFormProps) {
+export default function ProgressForm({ courseId, onClose }: ProgressFormProps) {
   const modalRef = useRef<HTMLDivElement>(null);
-
+  const isMobile = useMobile('(max-width: 375px)');
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [completedWorkouts, setCompletedWorkouts] = useState<string[]>([]);
 
@@ -33,7 +30,7 @@ export default function ProgressForm({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [onClose]);
 
-  const { token } = useAppSelector((state) => state.auth)
+  const { token } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     if (token) {
@@ -50,9 +47,9 @@ export default function ProgressForm({
         setCompletedWorkouts(completedWorkouts || []);
       });
     }
-  }, [courseId, token])
+  }, [courseId, token]);
 
-  const [selectedWorkout, setSelectedWorkout] = useState<string | null>(null)
+  const [selectedWorkout, setSelectedWorkout] = useState<string | null>(null);
 
   const handleToggleComplete = (id: string) => {
     setSelectedWorkout(id);
@@ -70,14 +67,20 @@ export default function ProgressForm({
               <div
                 key={workout._id}
                 className={styles.workoutItem}
-                onClick={isCompleted ? undefined : () => handleToggleComplete(workout._id)}
+                onClick={
+                  isCompleted
+                    ? undefined
+                    : () => handleToggleComplete(workout._id)
+                }
               >
                 <div
                   className={`${styles.checkbox} ${
-                    isCompleted || (selectedWorkout === workout._id) ? styles.checked : ''
+                    isCompleted || selectedWorkout === workout._id
+                      ? styles.checked
+                      : ''
                   }`}
                 >
-                  {(isCompleted || (selectedWorkout === workout._id)) && (
+                  {(isCompleted || selectedWorkout === workout._id) && (
                     <Image
                       src="/img/icon/Check-in-Circle.svg"
                       alt="Выполнено"
@@ -89,13 +92,11 @@ export default function ProgressForm({
                 </div>
                 <span className={styles.workoutName}>{workout.name}</span>
               </div>
-            )
+            );
           })}
         </div>
         <Link href={`/fitness/course/${courseId}/workout/${selectedWorkout}`}>
-          <div className={styles.saveButton}>
-            Начать
-          </div>
+          <div className={styles.saveButton}>Начать</div>
         </Link>
       </div>
     </div>

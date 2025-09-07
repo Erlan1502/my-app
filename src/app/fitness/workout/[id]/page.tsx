@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Workout } from '@/types/api';
 import styles from './workout.module.css';
-import ProgressForm from '../../../../components/ProgressForm/ProgressForm';
+import MyProgressForm from '../../../../components/MyProgressForm/MyProgressForm';
 
 const mockWorkoutData: Workout = {
   _id: 'mock123',
@@ -24,7 +24,6 @@ export default function WorkoutPage() {
   const [progressValues, setProgressValues] = useState<number[]>(
     new Array(mockWorkoutData.exercises.length).fill(0)
   );
-
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
 
   if (!workoutData) {
@@ -81,7 +80,7 @@ export default function WorkoutPage() {
         </div>
       </div>
       {isProgressModalOpen && (
-        <ProgressForm
+        <MyProgressForm
           exercises={workoutData.exercises}
           currentProgress={progressValues}
           onClose={() => setIsProgressModalOpen(false)}

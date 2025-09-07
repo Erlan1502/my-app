@@ -220,19 +220,20 @@
   }
   .directions {
     margin-bottom: 156px;
+    position: relative;
   }
   .directionsGrid {
     grid-template-columns: repeat(1, 1fr);
     gap: 30px;
   }
   .absoluteImage1 {
-    top: -250px;
+    top: 175px;
     right: -75px;
-    z-index: -1;
+    z-index: 10;
   }
   .absoluteImage2 {
-    top: -250px;
-    right: -175px;
+    top: 200px;
+    right: -195px;
   }
   .motivation {
     width: 100%;
@@ -254,5 +255,6 @@
   }
   .startSection {
     padding: 30px;
+    z-index: 11;
   }
 }

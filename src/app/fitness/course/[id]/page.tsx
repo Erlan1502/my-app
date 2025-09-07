@@ -145,8 +145,31 @@ export default function CoursePage() {
               </div>
             ))}
           </div>
+          {isMobile ? (
+            <div className={styles.absoluteImage1}>
+              <Image
+                src="/img/Man-ready.png"
+                alt="Мужчина на старте"
+                width={334}
+                height={347}
+              />
+            </div>
+          ) : (
+            ''
+          )}
+          {isMobile ? (
+            <div className={styles.absoluteImage2}>
+              <Image
+                src="/img/Style-Man-ready.svg"
+                alt="Стильная линия для мужчины"
+                width={600}
+                height={600}
+              />
+            </div>
+          ) : (
+            ''
+          )}
         </div>
-
         <div className={styles.startSection}>
           <div className={styles.motivation}>
             <h2 className={styles.subTitle}>Начните путь к новому телу</h2>
@@ -175,12 +198,7 @@ export default function CoursePage() {
           </div>
           <div className={styles.absoluteImage1}>
             {isMobile ? (
-              <Image
-                src="/img/Man-ready.png"
-                alt="Мужчина на старте"
-                width={334}
-                height={347}
-              />
+              ''
             ) : (
               <Image
                 src="/img/Man-ready.png"
@@ -193,12 +211,7 @@ export default function CoursePage() {
           <div className={styles.clippingWrapper}>
             <div className={styles.absoluteImage2}>
               {isMobile ? (
-                <Image
-                  src="/img/Style-Man-ready.svg"
-                  alt="Стильная линия для мужчины"
-                  width={600}
-                  height={600}
-                />
+                ''
               ) : (
                 <Image
                   src="/img/Style-Man-ready.svg"

@@ -10,7 +10,6 @@ import { CourseDetails } from '@/types/api';
 import { useAppSelector } from '@/store/store';
 import AuthForm from '@/components/AuthForm/AuthForm';
 
-// Объект для сопоставления названий курсов с изображениями
 const courseImages: { [key: string]: { hero: string; start: string } } = {
   Yoga: {
     hero: '/img/Yoga-skill-card.png',
@@ -51,11 +50,9 @@ export default function CoursePage() {
       setIsLoading(true);
       setError(null);
       try {
-        // Получаем данные самого курса
         const data = await getCourseById(params.id as string);
         setCourseData(data);
 
-        // Если пользователь авторизован, проверяем, добавлен ли у него этот курс
         if (token) {
           const userProfile = await getUserProfile(token);
           console.log(userProfile);
@@ -84,8 +81,7 @@ export default function CoursePage() {
     if (!params.id || isCourseAdded) return;
 
     try {
-      await addUserCourse(params.id as string, token); //
-      setIsCourseAdded(true);
+      await addUserCourse(params.id as string, token);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Не удалось добавить курс');
     }
@@ -109,7 +105,6 @@ export default function CoursePage() {
     return <div className={styles.error}>Курс не найден</div>;
   }
 
-  // Получаем пути к изображениям из нашего объекта
   const images = courseImages[courseData.nameEN] || {
     hero: '/img/default-hero.png',
     start: '/img/default-start.png',

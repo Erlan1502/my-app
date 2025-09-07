@@ -10,24 +10,23 @@ import { useAppSelector } from '@/store/store';
 
 export default function WorkoutPage() {
   const params = useParams<{ id: string; workoutId: string }>();
-
   const [isLoading, setIsLoading] = useState(true);
   const [workoutData, setWorkoutData] = useState<Workout | null>(null);
-  const [progressValues, setProgressValues] = useState<number[]>(
-    []
-  );
+  const [progressValues, setProgressValues] = useState<number[]>([]);
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
 
   const { token } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     if (token) {
-      getWorkoutById(params.workoutId, token).then((response) => {
-        setWorkoutData(response);
-        setProgressValues(new Array(response.exercises.length).fill(0))
-      }).finally(() => setIsLoading(false));
+      getWorkoutById(params.workoutId, token)
+        .then((response) => {
+          setWorkoutData(response);
+          setProgressValues(new Array(response.exercises.length).fill(0));
+        })
+        .finally(() => setIsLoading(false));
     }
-  }, [params.workoutId, token])
+  }, [params.workoutId, token]);
 
   if (isLoading) {
     return <div className={styles.loader}>Загрузка...</div>;
@@ -41,6 +40,11 @@ export default function WorkoutPage() {
     setProgressValues(newProgress);
     setIsProgressModalOpen(false);
   };
+
+  const hasProgress = progressValues.some((value) => value > 0);
+  const buttonText = hasProgress
+    ? 'Обновить свой прогресс'
+    : 'Заполнить свой прогресс';
 
   return (
     <>
@@ -57,12 +61,16 @@ export default function WorkoutPage() {
           ></iframe>
         </div>
         <div className={styles.exercisesBlock}>
-          <h2 className={styles.exercisesTitle}>Упражнения тренировки 2</h2>
+          <h2 className={styles.exercisesTitle}>{workoutData.name}</h2>
           <div className={styles.exercisesGrid}>
             {workoutData.exercises.map((exercise, index) => {
-              const progressPercent = Math.round(
-                (progressValues[index] / exercise.quantity) * 100
-              );
+              const progressPercent =
+                exercise.quantity > 0
+                  ? Math.round(
+                      (progressValues[index] / exercise.quantity) * 100
+                    )
+                  : 0;
+
               return (
                 <div key={exercise._id} className={styles.exerciseItem}>
                   <p className={styles.exerciseName}>
@@ -82,7 +90,7 @@ export default function WorkoutPage() {
             className={styles.actionButton}
             onClick={() => setIsProgressModalOpen(true)}
           >
-            Заполнить свой прогресс
+            {buttonText}
           </button>
         </div>
       </div>

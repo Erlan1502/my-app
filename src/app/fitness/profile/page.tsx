@@ -87,8 +87,8 @@ export default function ProfilePage() {
   }, [allCourses, token]);
 
   const removeCourse = (id: string) => {
-    setMyCourses((courses) => courses.filter(course => course._id !== id));
-  }
+    setMyCourses((courses) => courses.filter((course) => course._id !== id));
+  };
 
   return (
     <div className={styles.container}>
@@ -97,9 +97,11 @@ export default function ProfilePage() {
       <div className={styles.profileBlock}>
         <div className={styles.avatar} />
         <div className={styles.userInfo}>
-          <h2>Сергей</h2>
+          <h2>{email}</h2>
           <p>Логин: {email}</p>
-          <button className={styles.logoutButton} onClick={clearAuthData}>Выйти</button>
+          <button className={styles.logoutButton} onClick={clearAuthData}>
+            Выйти
+          </button>
         </div>
       </div>
 

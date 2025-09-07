@@ -12,23 +12,23 @@ import AuthForm from '@/components/AuthForm/AuthForm';
 
 // Объект для сопоставления названий курсов с изображениями
 const courseImages: { [key: string]: { hero: string; start: string } } = {
-  Йога: {
+  Yoga: {
     hero: '/img/Yoga-skill-card.png',
     start: '/img/ManDoingYoga.png',
   },
-  Стретчинг: {
+  Stretching: {
     hero: '/img/Stretching-skill-card.png',
     start: '/img/Stretching-start.png',
   },
-  Фитнес: {
+  Fitness: {
     hero: '/img/Fitness-skill-card.png',
     start: '/img/Fitness-start.png',
   },
-  'Степ-аэробика': {
+  StepAirobic: {
     hero: '/img/Step-aerobic-skill-card.png',
     start: '/img/Step-aerobic-start.png',
   },
-  Бодифлекс: {
+  BodyFlex: {
     hero: '/img/Bodyflex-skill-card.png',
     start: '/img/Body-flex-start.png',
   },
@@ -110,7 +110,7 @@ export default function CoursePage() {
   }
 
   // Получаем пути к изображениям из нашего объекта
-  const images = courseImages[courseData.nameRU] || {
+  const images = courseImages[courseData.nameEN] || {
     hero: '/img/default-hero.png',
     start: '/img/default-start.png',
   };

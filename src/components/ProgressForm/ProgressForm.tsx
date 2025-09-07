@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Exercise } from '@/types/api';
 import styles from './progressForm.module.css';
+import Image from 'next/image';
 
 type ProgressFormProps = {
   exercises: Exercise[];
@@ -63,15 +64,13 @@ export default function ProgressForm({
                 }`}
               >
                 {completedExercises[index] && (
-                  <svg className={styles.checkIcon} viewBox="0 0 13 10">
-                    <path
-                      d="M11.5833 1L4.58333 8.5L1.41667 5.16667"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  <Image
+                    src="/img/icon/Check-in-Circle.svg"
+                    alt="Выполнено"
+                    width={26}
+                    height={26}
+                    className={styles.checkIcon}
+                  />
                 )}
               </div>
               <span className={styles.exerciseName}>{exercise.name}</span>

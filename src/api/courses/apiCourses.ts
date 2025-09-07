@@ -18,7 +18,6 @@ export const addUserCourse = async (courseId: string, token: string) => {
   return fetchApi<{ message: string }>('/users/me/courses', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ courseId }),

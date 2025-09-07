@@ -34,7 +34,6 @@ export const saveWorkoutProgress = async (
   return fetchApi<void>(`/courses/${courseId}/workouts/${workoutId}`, {
     method: 'PATCH',
     headers: {
-      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ progressData }),

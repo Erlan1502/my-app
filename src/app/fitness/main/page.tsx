@@ -14,11 +14,11 @@ import CourseCard from '@/components/CourseCard/CourseCard';
 import { Course } from '@/types/api';
 
 const courseImages: { [key: string]: string } = {
-  Йога: '/img/Yoga.png',
-  Стретчинг: '/img/Stretching.png',
-  Фитнес: '/img/Fitness.png',
-  'Степ-аэробика': '/img/Step-aerobic.png',
-  Бодифлекс: '/img/Body-flex.png',
+  Yoga: '/img/Yoga.png',
+  Stretching: '/img/Stretching.png',
+  Fitness: '/img/Fitness.png',
+  StepAirobic: '/img/Step-aerobic.png',
+  BodyFlex: '/img/Body-flex.png',
 };
 
 export default function HomePage() {
@@ -62,7 +62,7 @@ export default function HomePage() {
           <Link href={`/fitness/course/${course._id}`} key={course._id}>
             <CourseCard
               nameRU={course.nameRU}
-              imageUrl={courseImages[course.nameRU]}
+              imageUrl={courseImages[course.nameEN]}
               durationInDays={course.durationInDays}
               dailyDurationInMinutes={course.dailyDurationInMinutes}
               difficulty={course.difficulty}

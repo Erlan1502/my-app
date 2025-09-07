@@ -52,40 +52,38 @@
 }
 
 .checkbox {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   border: 1px solid #000;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
 
-  .checked {
-    border-color: #05e300;
-    background-color: #05e300;
-  }
+.checkIcon {
+  width: 26px;
+  height: 26px;
+  fill: #fff;
+}
 
-  .checkIcon {
-    width: 18px;
-    height: 18px;
-    fill: #fff;
-  }
-
-  .saveButton {
-    margin-top: 30px;
-    width: 100%;
-    padding: 16px 26px;
-    border-radius: 46px;
-    background: #bcec30;
-    border: none;
-    cursor: pointer;
-    color: rgba(0, 0, 0, 1);
-    font-family: Roboto;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 21px;
-    letter-spacing: 0px;
-    text-align: left;
-  }
+.saveButton {
+  display: flex;
+  margin-top: 30px;
+  width: 100%;
+  padding: 16px 26px;
+  border-radius: 46px;
+  background: #bcec30;
+  border: none;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 1);
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: 0px;
+  text-align: left;
+  justify-content: center;
+  align-items: center;
 }

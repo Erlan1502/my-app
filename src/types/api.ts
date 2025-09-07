@@ -56,11 +56,11 @@ export interface Workout {
 export interface WorkoutProgress {
   workoutId: string;
   workoutCompleted: boolean;
-  progressData: number[];
+  progressData: number[] | undefined;
 }
 
 export interface CourseProgress {
   courseId: string;
   courseCompleted: boolean;
-  workoutsProgress: WorkoutProgress[];
+  workoutsProgress: WorkoutProgress[] | undefined;
 }

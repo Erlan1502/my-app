@@ -69,3 +69,10 @@
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 40px;
 }
+
+.loader,
+.error {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 50px;
+}

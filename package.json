@@ -2,8 +2,6 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-
-  
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
@@ -34,5 +32,4 @@
     "ts-jest": "^29.4.1",
     "typescript": "^5"
   }
-  
 }

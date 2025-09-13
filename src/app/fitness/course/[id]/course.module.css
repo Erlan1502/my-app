@@ -1,0 +1,260 @@
+.container {
+  padding-top: 60px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-bottom: 50px;
+}
+
+.loader,
+.error {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.hero {
+  background-color: #f2f2f2;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+  min-height: 250px;
+}
+
+.heroImage {
+  width: 1160px;
+  max-height: 310px;
+}
+
+.title {
+  font-size: 60px;
+  font-weight: 400;
+  margin-bottom: 60px;
+}
+
+.infoCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.card {
+  padding: 20px;
+  font-size: 24px;
+  border-radius: 28px;
+  background: var(
+    --dark-gradient,
+    linear-gradient(
+      152.61deg,
+      rgba(21.461162567138672, 23.483339309692383, 31.572021484375, 1),
+      rgba(30.28127670288086, 33.45381164550781, 46.14404296875, 1) 100%
+    )
+  );
+  display: flex;
+  gap: 25px;
+}
+.number {
+  color: rgba(188, 236, 48, 1);
+  font-family: Roboto;
+  font-size: 75px;
+  font-weight: 500;
+  line-height: 88px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+.description {
+  color: rgba(255, 255, 255, 1);
+}
+
+.card span {
+  font-size: 48px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.benefits {
+  margin-bottom: 50px;
+}
+.directions {
+  margin-bottom: 102px;
+}
+
+.subTitle {
+  width: 398px;
+  margin-bottom: 28px;
+  color: rgba(0, 0, 0, 1);
+  font-family: Roboto;
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 70px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.directionsGrid {
+  padding: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  border-radius: 28px;
+  background: rgba(188, 236, 48, 1);
+}
+
+.directionItem {
+  font-size: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.directionItem svg {
+  width: 26px;
+  height: 26px;
+  margin-top: 4px;
+}
+
+.startSection {
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  border-radius: 30px;
+  box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
+  background: rgba(255, 255, 255, 1);
+  position: relative;
+}
+.motivation {
+  width: 437px;
+  position: relative;
+  z-index: 2;
+}
+.clippingWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 30px;
+  overflow: hidden;
+  z-index: 1;
+}
+.absoluteImage1 {
+  position: absolute;
+  right: 50px;
+  top: -50px;
+  z-index: 10;
+}
+.absoluteImage2 {
+  z-index: 9;
+  position: absolute;
+  top: 100px;
+  right: 50px;
+}
+
+.benefitsList {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 28px;
+  width: 437px;
+}
+
+.benefitItem {
+  color: gray;
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  text-align: left;
+  position: static;
+  padding-left: 0;
+}
+.startButton {
+  width: 100%;
+  padding: 16px 32px;
+  border-radius: 46px;
+  background-color: rgba(188, 236, 48, 1);
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.startImage {
+  max-width: 400px;
+  height: auto;
+}
+@media (max-width: 375px) {
+  .hero {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+  .title {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+  .infoCards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .description {
+    color: rgba(255, 255, 255, 1);
+    font-size: 18px;
+  }
+  .card {
+    align-items: center;
+  }
+  .infoCards {
+    margin-bottom: 40px;
+  }
+  .subTitle {
+    font-size: 24px;
+    line-height: 28px;
+    margin-bottom: 24px;
+  }
+  .motivation > .subTitle {
+    font-size: 32px;
+    width: 100%;
+  }
+  .directions {
+    margin-bottom: 156px;
+    position: relative;
+  }
+  .directionsGrid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+  }
+  .absoluteImage1 {
+    top: 175px;
+    right: -75px;
+    z-index: 10;
+  }
+  .absoluteImage2 {
+    top: 200px;
+    right: -195px;
+  }
+  .motivation {
+    width: 100%;
+  }
+  .benefitsList {
+    width: 100%;
+    padding: 0;
+    padding-bottom: 28px;
+  }
+  .benefitItem {
+    font-size: 18px;
+  }
+  .startButton {
+    font-size: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .startSection {
+    padding: 30px;
+    z-index: 11;
+  }
+}

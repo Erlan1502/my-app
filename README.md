@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SkyFitnessPro
 
-## Getting Started
+Это веб-приложение для онлайн-тренировок, предназначенное для занятий фитнесом в домашних условиях. Проект построен на Next.js с использованием App Router и TypeScript. Он позволяет пользователям просматривать курсы, добавлять их в свой профиль и отслеживать прогресс выполнения тренировок.
 
-First, run the development server:
+## Основные возможности
+
+- **Аутентификация пользователей**: Регистрация и вход в систему с использованием модального окна. Сессия пользователя сохраняется между перезагрузками страницы.
+- **Каталог курсов**: Главная страница отображает список всех доступных фитнес-курсов.
+- **Личный кабинет**: Пользователи могут просматривать свой профиль, видеть добавленные курсы и общий прогресс по каждому из них.
+- **Управление курсами**: Пользователи могут добавлять курсы в свой профиль и удалять их.
+- **Страница курса**: Детальное описание каждого курса, включая его преимущества и направления (`page.tsx`).
+- **Просмотр тренировок**: На странице тренировки отображается видео с упражнениями (`/workout/[workoutId]/page.tsx`).
+- **Отслеживание прогресса**: Пользователи могут заполнять свой прогресс по каждому упражнению в тренировке. Данные сохраняются на сервере и в `localStorage` (`/workout/[workoutId]/page.tsx`).
+- **Адаптивный дизайн**: Интерфейс адаптирован для использования на мобильных устройствах.
+
+## Стек технологий
+
+- **Framework**: Next.js 15.5.2
+- **Язык**: TypeScript
+- **Библиотека UI**: React 19.1.0
+- **Управление состоянием**: Redux Toolkit и React-Redux
+- **Стилизация**: CSS Modules для компонентных стилей и `globals.css` для общих правил
+- **Сборка**: Используется Turbopack для ускорения разработки и сборки проекта
+
+## Тестирование
+
+Проект покрыт юнит-тестами для проверки ключевой функциональности. Тестирование помогает обеспечить стабильность и надежность кода при внесении изменений.
+
+### Инструменты
+
+- **Jest**: Основной фреймворк для тестирования JavaScript
+- **React Testing Library**: Библиотека для тестирования React-компонентов, фокусирующаяся на поведении, видимом пользователю
+- **ts-jest**: Пресет для Jest, позволяющий писать тесты на TypeScript
+- **identity-obj-proxy**: Пакет для мокирования импортов CSS-модулей
+
+### Что протестировано
+
+- **Логика Redux Slices**: Проверены все редьюсеры для `authSlice` и `coursesSlice`, что гарантирует корректное управление состоянием
+- **Функции API**: Протестирована логика взаимодействия с бэкендом (регистрация, вход, получение и сохранение данных). Сетевые запросы мокируются, чтобы тесты были быстрыми и изолированными
+- **Вспомогательные утилиты**: Проверены отдельные функции, содержащие переиспользуемую бизнес-логику
+
+### Запуск тестов
+
+Для запуска всех тестов в проекте выполните команду:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Эта команда запустит Jest, который автоматически найдет и выполнит все тестовые файлы в проекте.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Структура проекта
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Проект использует Next.js App Router для маршрутизации и организации файлов.
 
-## Learn More
+- `app/`: Основная директория с маршрутами приложения
+  - `layout.tsx`: Корневой макет, подключающий Redux Provider и компонент `Header`
+  - `fitness/main/page.tsx`: Главная страница с каталогом курсов
+  - `fitness/profile/page.tsx`: Страница профиля пользователя
+  - `fitness/course/[id]/page.tsx`: Динамическая страница для отображения детальной информации о курсе
+  - `fitness/course/[id]/workout/[workoutId]/page.tsx`: Динамическая страница для конкретной тренировки
+- `components/`: Переиспользуемые React-компоненты (`Header`, `AuthForm`, `CourseCard` и др.)
+- `store/`: Настройка Redux, включая `store`, `slices` (`authSlice`, `coursesSlice`) и `Provider`
+- `api/`: Модули для взаимодействия с внешним API, включая общую функцию `fetchApi`
+- `hooks/`: Пользовательские хуки, такие как `useInitAuth` для инициализации аутентификации и `useMobile` для определения мобильных устройств
+- `public/`: Статические файлы, включая изображения и иконки
+- `types/`: Определения типов TypeScript для данных API и локальных структур
 
-To learn more about Next.js, take a look at the following resources:
+## Начало работы
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Клонируйте репозиторий:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   git clone https://github.com/Erlan1502/my-app.git
+   cd my-app
+   ```
 
-## Deploy on Vercel
+2. **Установите зависимости:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   npm install
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **Запустите сервер для разработки:**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Откройте приложение в браузере:**
+
+   Перейдите по адресу http://localhost:3000.
+
+## Доступные скрипты
+
+- `npm run dev`: Запуск в режиме разработки
+- `npm run build`: Сборка для продакшена
+- `npm run start`: Запуск продакшн-сборки
+- `npm run lint`: Проверка кода с помощью ESLint
+- `npm run test`: Запуск юнит-тестов
+
+## API
+
+Приложение взаимодействует с внешним API по базовому адресу: `https://wedev-api.sky.pro/api/fitness`.

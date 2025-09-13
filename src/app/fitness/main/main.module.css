@@ -1,0 +1,92 @@
+.hero {
+  margin-top: 60px;
+  max-width: 100%;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  color: rgba(0, 0, 0, 1);
+  font-family: Roboto;
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 70px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+.motivation {
+  margin-top: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+}
+
+.description {
+  color: rgba(0, 0, 0, 1);
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+.footer {
+  margin-bottom: 81px;
+  margin-top: 34px;
+  display: flex;
+  justify-content: center;
+}
+.footerButton {
+  width: 127px;
+  height: 52px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 26px 16px 26px;
+  border-radius: 46px;
+  background: rgba(188, 236, 48, 1);
+  cursor: pointer;
+}
+@media (max-width: 375px) {
+  .hero {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    flex-direction: column;
+  }
+
+  .title {
+    font-size: 32px;
+    line-height: 40px;
+    margin-bottom: 20px;
+  }
+
+  /* Скрываем декоративный элемент на мобильных */
+  .motivation {
+    display: none;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .description {
+    display: none;
+  }
+
+  .footer {
+    margin-top: 24px;
+    margin-bottom: 29px;
+    justify-content: flex-end;
+  }
+
+  .footerButton {
+    width: 147px;
+    font-size: 18px;
+  }
+}

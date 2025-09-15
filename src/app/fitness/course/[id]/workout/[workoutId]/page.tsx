@@ -1,5 +1,5 @@
 'use client';
-
+export const runtime = 'edge';
 import { useEffect, useState } from 'react';
 import { Workout } from '@/types/api';
 import styles from './workout.module.css';
